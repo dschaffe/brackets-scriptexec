@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Node Exec Results</title>
+    <link rel="stylesheet" type="text/css" href="../html/NodeExecReport.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+          var jsondata='%jsondata%';
+          var data=JSON.parse(jsondata);
+          if (data.command != null && data.command !='') {
+              $("#cmdline").append('<h5>script</h5>'+
+                                   '<span class="details">command:</span><span class="command">'+data.command+'</span><br>'+
+                                   '<span class="details">exit code:</span><span class="content">'+data.exitcode+'</span><br>'+
+                                   '<span class="details">time:</span><span class="content">'+data.time+'s</span>');
+          }
+          if (data.stderr != null && data.stderr != '') {
+              $("#stderr").append('<h5>stderr</h5><textarea id="styled" readonly>'+data.stderr+"</textarea>");
+          }          
+          if (data.error != null && data.error != '') {
+              $("#errors").append('<h5>errors</h5><textarea id="styled" readonly>'+data.error+"</textarea>");
+          }
+          $("#stdout").append('<h5>stdout</h5><textarea id="styled" readonly>'+data.stdout+"</textarea>");
+          $("title").append(' - ' + data.title);
+
+     });
+    </script>
+</head>
+
+<body>
+    <div id="cmdline"></div>
+    <div id="errors"></div>
+    <div id="stdout"></div>
+    <div id="stderr"></div>
+</body>
+</html>
